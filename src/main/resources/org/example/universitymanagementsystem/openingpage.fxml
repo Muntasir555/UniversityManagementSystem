@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.universitymanagementsystem.controllers.OpeningPageController">
+
+    <!-- ===== Top Section ===== -->
+    <top>
+        <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="30"/>
+            </padding>
+
+            <Label text="University Management System"
+                   style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+
+            <Label text="Manage students, faculty and administration from one place"
+                   style="-fx-font-size: 14px; -fx-text-fill: #555555;"/>
+        </VBox>
+    </top>
+
+
+    <center>
+        <HBox alignment="CENTER" spacing="40">
+            <padding>
+                <Insets top="40"/>
+            </padding>
+
+
+            <VBox alignment="CENTER" spacing="15"
+                  style="-fx-border-color: #cccccc; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 25;">
+                <Label text="Student Portal"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="View results, CGPA and attendance"
+                       style="-fx-text-fill: #666666;"/>
+                <Button text="Login as Student"
+                        prefWidth="160"
+                        onAction="#openStudentLogin"/>
+            </VBox>
+
+
+            <VBox alignment="CENTER" spacing="15"
+                  style="-fx-border-color: #cccccc; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 25;">
+                <Label text="Faculty Portal"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Manage courses and student records"
+                       style="-fx-text-fill: #666666;"/>
+                <Button text="Login as Faculty"
+                        prefWidth="160"
+                        onAction="#openFacultyLogin"/>
+            </VBox>
+
+
+            <VBox alignment="CENTER" spacing="15"
+                  style="-fx-border-color: #cccccc; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 25;">
+                <Label text="Admin Portal"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Label text="Control system and user access"
+                       style="-fx-text-fill: #666666;"/>
+                <Button text="Login as Admin"
+                        prefWidth="160"
+                        onAction="#openAdminLogin"/>
+            </VBox>
+
+        </HBox>
+    </center>
+
+
+    <bottom>
+        <HBox alignment="CENTER">
+            <padding>
+                <Insets bottom="15"/>
+            </padding>
+
+            <Label text="© 2025 University Management System"
+                   style="-fx-text-fill: #888888;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
