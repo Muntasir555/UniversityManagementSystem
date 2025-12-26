@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.universitymanagementsystem.controllers.AdminDashboardController">
+
+    <!-- ===== Top Header ===== -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="15" bottom="15" left="20" right="20"/>
+            </padding>
+
+            <Label text="Admin Dashboard"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <Label text="University Management System"
+                   style="-fx-text-fill: #666666;"/>
+        </HBox>
+    </top>
+
+    <!-- ===== Left Navigation ===== -->
+    <left>
+        <VBox spacing="15"
+              style="-fx-border-color: #dddddd; -fx-border-width: 0 1 0 0;">
+            <padding>
+                <Insets top="20" left="15" right="15"/>
+            </padding>
+
+            <Button text="Register Student"
+                    prefWidth="180"
+                    onAction="#openRegisterStudent"/>
+
+            <Button text="Register Faculty"
+                    prefWidth="180"
+                    onAction="#openRegisterFaculty"/>
+
+            <Button text="View Students"
+                    prefWidth="180"
+                    onAction="#viewStudents"/>
+
+            <Button text="View Faculty"
+                    prefWidth="180"
+                    onAction="#viewFaculty"/>
+
+            <Button text="Logout"
+                    prefWidth="180"
+                    onAction="#logout"/>
+        </VBox>
+    </left>
+
+    <!-- ===== Center Content ===== -->
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="Welcome, Admin"
+                   style="-fx-font-size: 18px;"/>
+
+            <Label text="Use the navigation panel to manage students and faculty."
+                   style="-fx-text-fill: #555555;"/>
+        </VBox>
+    </center>
+
+</BorderPane>
+
