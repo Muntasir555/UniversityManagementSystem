@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.universitymanagementsystem.controllers.StudentAttendanceController"
+      spacing="20" alignment="CENTER">
+
+    <Label text="My Attendance" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    
+    <TableView fx:id="attendanceTable" maxWidth="600">
+         <columns>
+             <!-- Columns added in Controller -->
+         </columns>
+    </TableView>
+
+</VBox>

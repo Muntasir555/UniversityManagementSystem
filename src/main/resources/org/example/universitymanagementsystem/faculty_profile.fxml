@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.universitymanagementsystem.controllers.FacultyProfileController"
+      spacing="20" alignment="TOP_LEFT">
+
+    <padding>
+        <Insets top="30" left="40" right="40" bottom="30"/>
+    </padding>
+
+    <Label text="Faculty Profile" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <VBox spacing="10" style="-fx-background-color: #e6f3ff; -fx-padding: 20; -fx-background-radius: 10;">
+        <HBox spacing="10">
+            <Label text="ID:" style="-fx-font-weight: bold; -fx-min-width: 100;"/>
+            <Label fx:id="idLabel" text="N/A"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Name:" style="-fx-font-weight: bold; -fx-min-width: 100;"/>
+            <Label fx:id="nameLabel" text="N/A"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Email:" style="-fx-font-weight: bold; -fx-min-width: 100;"/>
+            <Label fx:id="emailLabel" text="N/A"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Department:" style="-fx-font-weight: bold; -fx-min-width: 100;"/>
+            <Label fx:id="departmentLabel" text="N/A"/>
+        </HBox>
+    </VBox>
+
+</VBox>
