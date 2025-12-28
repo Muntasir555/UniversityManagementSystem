@@ -37,8 +37,7 @@
                prefWidth="280"/>
 
     <Label text="Department"/>
-    <TextField fx:id="departmentField"
-               promptText="Department name"
+    <javafx.scene.control.ChoiceBox fx:id="departmentChoiceBox"
                prefWidth="280"/>
 
     <Label text="Password"/>

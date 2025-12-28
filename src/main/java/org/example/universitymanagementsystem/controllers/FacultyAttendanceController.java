@@ -30,16 +30,15 @@ public class FacultyAttendanceController {
 
     @FXML
     private void markAttendance(ActionEvent event) {
-        String studentIdStr = studentIdField.getText();
+        String studentId = studentIdField.getText();
         String status = statusComboBox.getValue();
 
-        if (studentIdStr.isEmpty() || datePicker.getValue() == null || status == null) {
+        if (studentId.isEmpty() || datePicker.getValue() == null || status == null) {
             showAlert(Alert.AlertType.ERROR, "Error", "All fields are required.");
             return;
         }
 
         try {
-            int studentId = Integer.parseInt(studentIdStr);
             String date = datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
             Attendance attendance = new Attendance();
@@ -56,8 +55,8 @@ public class FacultyAttendanceController {
                 showAlert(Alert.AlertType.ERROR, "Error", "Failed to mark attendance.");
             }
 
-        } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Invalid Student ID.");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Invalid input.");
         }
     }
 

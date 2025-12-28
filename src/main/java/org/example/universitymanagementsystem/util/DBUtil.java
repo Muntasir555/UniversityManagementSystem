@@ -15,10 +15,11 @@ public class DBUtil {
 
     public static void initializeDatabase() {
         String createStudentTable = "CREATE TABLE IF NOT EXISTS students ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "id TEXT PRIMARY KEY, "
                 + "name TEXT NOT NULL, "
                 + "email TEXT NOT NULL UNIQUE, "
                 + "department TEXT, "
+                + "batch TEXT, "
                 + "password TEXT NOT NULL"
                 + ");";
 
@@ -54,7 +55,7 @@ public class DBUtil {
 
             String createResultTable = "CREATE TABLE IF NOT EXISTS results ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + "student_id INTEGER NOT NULL, "
+                    + "student_id TEXT NOT NULL, "
                     + "subject_id INTEGER NOT NULL, "
                     + "marks REAL NOT NULL, "
                     + "grade TEXT NOT NULL, "
@@ -65,7 +66,7 @@ public class DBUtil {
 
             String createAttendanceTable = "CREATE TABLE IF NOT EXISTS attendance ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + "student_id INTEGER NOT NULL, "
+                    + "student_id TEXT NOT NULL, "
                     + "date TEXT NOT NULL, "
                     + "status TEXT NOT NULL, "
                     + "FOREIGN KEY(student_id) REFERENCES students(id)"

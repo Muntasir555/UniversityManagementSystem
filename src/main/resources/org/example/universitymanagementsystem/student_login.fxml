@@ -37,6 +37,11 @@
                 <Insets top="30" bottom="30" left="40" right="40"/>
             </padding>
 
+            <Label text="Department"
+                   style="-fx-font-size: 14px;"/>
+            <javafx.scene.control.ChoiceBox fx:id="departmentChoiceBox"
+                        prefWidth="260"/>
+
             <Label text="Email"
                    style="-fx-font-size: 14px;"/>
 
