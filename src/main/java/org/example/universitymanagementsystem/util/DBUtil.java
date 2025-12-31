@@ -73,6 +73,33 @@ public class DBUtil {
                     + ");";
             stmt.execute(createAttendanceTable);
 
+            String createCourseAssignmentTable = "CREATE TABLE IF NOT EXISTS course_assignments ("
+                    + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "student_id TEXT NOT NULL, "
+                    + "subject_id INTEGER NOT NULL, "
+                    + "faculty_id INTEGER NOT NULL, "
+                    + "semester TEXT NOT NULL, "
+                    + "UNIQUE(student_id, subject_id, semester), "
+                    + "FOREIGN KEY(student_id) REFERENCES students(id), "
+                    + "FOREIGN KEY(subject_id) REFERENCES subjects(id),"
+                    + "FOREIGN KEY(faculty_id) REFERENCES faculty(id)"
+                    + ");";
+            stmt.execute(createCourseAssignmentTable);
+
+            // Schema Upgrade: Add cgpa to students if not exists
+            try {
+                stmt.execute("ALTER TABLE students ADD COLUMN cgpa REAL DEFAULT 0.0");
+            } catch (SQLException e) {
+                // Column likely exists
+            }
+
+            // Schema Upgrade: Add semester to results if not exists
+            try {
+                stmt.execute("ALTER TABLE results ADD COLUMN semester TEXT");
+            } catch (SQLException e) {
+                // Column likely exists
+            }
+
             try (java.sql.ResultSet rs = stmt.executeQuery("SELECT count(*) FROM admins")) {
                 if (rs.next() && rs.getInt(1) == 0) {
                     stmt.execute("INSERT INTO admins(username, password) VALUES('admin', 'admin123')");

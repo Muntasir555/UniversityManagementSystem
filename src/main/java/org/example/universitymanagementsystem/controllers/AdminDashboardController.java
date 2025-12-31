@@ -25,6 +25,11 @@ public class AdminDashboardController {
     }
 
     @FXML
+    private void openAssignCourse(ActionEvent event) {
+        loadPage(event, "/org/example/universitymanagementsystem/admin_assign_course.fxml");
+    }
+
+    @FXML
     private void viewStudents(ActionEvent event) {
         loadPage(event, "/org/example/universitymanagementsystem/student_list.fxml");
     }

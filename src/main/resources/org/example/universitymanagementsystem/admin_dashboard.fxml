@@ -43,6 +43,10 @@
                     prefWidth="180"
                     onAction="#openRegisterFaculty"/>
 
+            <Button text="Assign Course"
+                    prefWidth="180"
+                    onAction="#openAssignCourse"/>
+
             <Button text="View Students"
                     prefWidth="180"
                     onAction="#viewStudents"/>
