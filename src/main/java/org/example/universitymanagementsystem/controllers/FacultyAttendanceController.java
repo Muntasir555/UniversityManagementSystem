@@ -1,70 +1,184 @@
 package org.example.universitymanagementsystem.controllers;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.example.universitymanagementsystem.database.AttendanceDatabase;
+import org.example.universitymanagementsystem.database.CourseAssignmentDatabase;
+import org.example.universitymanagementsystem.database.StudentDatabase;
+import org.example.universitymanagementsystem.database.SubjectDatabase;
 import org.example.universitymanagementsystem.models.Attendance;
+import org.example.universitymanagementsystem.models.CourseAssignment;
+import org.example.universitymanagementsystem.models.Student;
+import org.example.universitymanagementsystem.models.Subject;
+import org.example.universitymanagementsystem.util.Session;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class FacultyAttendanceController {
 
     @FXML
-    private TextField studentIdField;
+    private ComboBox<Subject> courseComboBox;
 
     @FXML
     private DatePicker datePicker;
 
     @FXML
-    private ComboBox<String> statusComboBox;
+    private TableView<AttendanceEntry> attendanceTable;
+
+    @FXML
+    private TableColumn<AttendanceEntry, String> rollNoCol;
+
+    @FXML
+    private TableColumn<AttendanceEntry, String> nameCol;
+
+    @FXML
+    private TableColumn<AttendanceEntry, CheckBox> statusCol;
+
+    @FXML
+    private Label messageLabel;
+
+    private ObservableList<AttendanceEntry> studentList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        statusComboBox.setItems(FXCollections.observableArrayList("Present", "Absent", "Late"));
-    }
-
-    @FXML
-    private void markAttendance(ActionEvent event) {
-        String studentId = studentIdField.getText();
-        String status = statusComboBox.getValue();
-
-        if (studentId.isEmpty() || datePicker.getValue() == null || status == null) {
-            showAlert(Alert.AlertType.ERROR, "Error", "All fields are required.");
+        if (Session.currentFaculty == null) {
             return;
         }
 
-        try {
-            String date = datePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        setupTable();
+        loadCourses();
+        datePicker.setValue(LocalDate.now());
 
-            Attendance attendance = new Attendance();
-            attendance.setStudentId(studentId);
-            attendance.setDate(date);
-            attendance.setStatus(status);
+        courseComboBox.setOnAction(event -> loadStudents());
+        datePicker.setOnAction(event -> loadStudents());
+    }
 
-            if (AttendanceDatabase.markAttendance(attendance)) {
-                showAlert(Alert.AlertType.INFORMATION, "Success", "Attendance marked successfully.");
-                studentIdField.clear();
-                statusComboBox.getSelectionModel().clearSelection();
-                datePicker.setValue(null);
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Error", "Failed to mark attendance.");
+    private void setupTable() {
+        rollNoCol.setCellValueFactory(
+                data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getStudentId()));
+        nameCol.setCellValueFactory(
+                data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getStudentName()));
+        statusCol.setCellValueFactory(
+                data -> new javafx.beans.property.SimpleObjectProperty<>(data.getValue().getPresentCheckBox()));
+
+        attendanceTable.setItems(studentList);
+        attendanceTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    }
+
+    private void loadCourses() {
+        List<CourseAssignment> assignments = CourseAssignmentDatabase
+                .getAssignmentsByFaculty(Session.currentFaculty.getId());
+        ObservableList<Subject> subjects = FXCollections.observableArrayList();
+        for (CourseAssignment ca : assignments) {
+            Subject subject = SubjectDatabase.getSubjectById(ca.getSubjectId());
+            if (subject != null) {
+                subjects.add(subject);
             }
+        }
+        courseComboBox.setItems(subjects);
+        // Custom cell factory to show subject code/name
+        courseComboBox.setCellFactory(param -> new ListCell<Subject>() {
+            @Override
+            protected void updateItem(Subject item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getCode() + " - " + item.getName());
+                }
+            }
+        });
+        courseComboBox.setButtonCell(new ListCell<Subject>() {
+            @Override
+            protected void updateItem(Subject item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getCode() + " - " + item.getName());
+                }
+            }
+        });
+    }
 
-        } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Invalid input.");
+    private void loadStudents() {
+        studentList.clear();
+        Subject selectedSubject = courseComboBox.getValue();
+        if (selectedSubject == null)
+            return;
+
+        List<String> studentIds = CourseAssignmentDatabase
+                .getStudentIdsByFacultyAndSubject(Session.currentFaculty.getId(), selectedSubject.getId());
+
+        for (String studentId : studentIds) {
+            Student student = StudentDatabase.getStudentById(studentId);
+            if (student != null) {
+                studentList.add(new AttendanceEntry(student.getId(), student.getName()));
+            }
         }
     }
 
-    private void showAlert(Alert.AlertType type, String title, String content) {
-        Alert alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
+    // Helper class for TableView
+    public static class AttendanceEntry {
+        private String studentId;
+        private String studentName;
+        private CheckBox presentCheckBox;
+
+        public AttendanceEntry(String studentId, String studentName) {
+            this.studentId = studentId;
+            this.studentName = studentName;
+            this.presentCheckBox = new CheckBox();
+            this.presentCheckBox.setSelected(true); // Default present
+        }
+
+        public String getStudentId() {
+            return studentId;
+        }
+
+        public String getStudentName() {
+            return studentName;
+        }
+
+        public CheckBox getPresentCheckBox() {
+            return presentCheckBox;
+        }
+    }
+
+    @FXML
+    private void handleSave() {
+        Subject selectedSubject = courseComboBox.getValue();
+        LocalDate selectedDate = datePicker.getValue();
+
+        if (selectedSubject == null || selectedDate == null) {
+            messageLabel.setText("Please select course and date.");
+            return;
+        }
+
+        String dateStr = selectedDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        int successCount = 0;
+
+        for (AttendanceEntry entry : studentList) {
+            Attendance attendance = new Attendance();
+            attendance.setStudentId(entry.getStudentId());
+            attendance.setSubjectId(selectedSubject.getId());
+            attendance.setDate(dateStr);
+            attendance.setStatus(entry.getPresentCheckBox().isSelected() ? "Present" : "Absent");
+
+            if (AttendanceDatabase.markAttendance(attendance)) {
+                successCount++;
+            }
+        }
+
+        if (successCount > 0) {
+            messageLabel.setText("Attendance saved successfully!");
+            messageLabel.setStyle("-fx-text-fill: green;");
+        } else {
+            messageLabel.setText("Failed.");
+            messageLabel.setStyle("-fx-text-fill: red;");
+        }
     }
 }

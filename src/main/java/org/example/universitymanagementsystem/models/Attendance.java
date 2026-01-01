@@ -5,6 +5,7 @@ public class Attendance {
     private String studentId;
     private String date;
     private String status;
+    private int subjectId;
 
     public Attendance() {
     }
@@ -46,5 +47,13 @@ public class Attendance {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
 }

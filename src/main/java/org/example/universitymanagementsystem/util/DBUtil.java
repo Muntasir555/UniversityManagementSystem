@@ -67,9 +67,11 @@ public class DBUtil {
             String createAttendanceTable = "CREATE TABLE IF NOT EXISTS attendance ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + "student_id TEXT NOT NULL, "
+                    + "subject_id INTEGER, "
                     + "date TEXT NOT NULL, "
                     + "status TEXT NOT NULL, "
-                    + "FOREIGN KEY(student_id) REFERENCES students(id)"
+                    + "FOREIGN KEY(student_id) REFERENCES students(id), "
+                    + "FOREIGN KEY(subject_id) REFERENCES subjects(id)"
                     + ");";
             stmt.execute(createAttendanceTable);
 
@@ -96,6 +98,13 @@ public class DBUtil {
             // Schema Upgrade: Add semester to results if not exists
             try {
                 stmt.execute("ALTER TABLE results ADD COLUMN semester TEXT");
+            } catch (SQLException e) {
+                // Column likely exists
+            }
+
+            // Schema Upgrade: Add subject_id to attendance if not exists
+            try {
+                stmt.execute("ALTER TABLE attendance ADD COLUMN subject_id INTEGER");
             } catch (SQLException e) {
                 // Column likely exists
             }

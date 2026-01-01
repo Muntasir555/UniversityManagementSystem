@@ -24,7 +24,7 @@ public class FacultyListController {
     public void initialize() {
         setupTable();
 
-        departmentFilter.getItems().addAll("All", "CSE", "EEE", "Civil", "ME");
+        departmentFilter.getItems().addAll("All", "CSE", "EEE", "Civil", "ME", "Physics", "Math", "Chemistry");
         departmentFilter.setValue("All");
 
         departmentFilter.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {

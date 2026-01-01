@@ -55,6 +55,10 @@
                     prefWidth="180"
                     onAction="#viewFaculty"/>
 
+            <Button text="Change Password"
+                    prefWidth="180"
+                    onAction="#openChangePassword"/>
+
             <Button text="Logout"
                     prefWidth="180"
                     onAction="#logout"/>

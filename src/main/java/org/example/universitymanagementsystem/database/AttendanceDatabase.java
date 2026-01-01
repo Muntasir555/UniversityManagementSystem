@@ -13,7 +13,7 @@ import java.util.List;
 public class AttendanceDatabase {
 
     public static boolean markAttendance(Attendance attendance) {
-        String sql = "INSERT INTO attendance(student_id, date, status) VALUES(?, ?, ?)";
+        String sql = "INSERT INTO attendance(student_id, date, status, subject_id) VALUES(?, ?, ?, ?)";
 
         try (Connection conn = DBUtil.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -21,6 +21,7 @@ public class AttendanceDatabase {
             pstmt.setString(1, attendance.getStudentId());
             pstmt.setString(2, attendance.getDate());
             pstmt.setString(3, attendance.getStatus());
+            pstmt.setInt(4, attendance.getSubjectId());
 
             pstmt.executeUpdate();
             return true;
@@ -47,6 +48,7 @@ public class AttendanceDatabase {
                     attendance.setStudentId(rs.getString("student_id"));
                     attendance.setDate(rs.getString("date"));
                     attendance.setStatus(rs.getString("status"));
+                    attendance.setSubjectId(rs.getInt("subject_id"));
                     attendanceList.add(attendance);
                 }
             }

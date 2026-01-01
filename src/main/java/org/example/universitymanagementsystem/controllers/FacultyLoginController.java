@@ -31,7 +31,7 @@ public class FacultyLoginController {
 
     @FXML
     public void initialize() {
-        departmentChoiceBox.getItems().addAll("CSE", "EEE", "Civil", "ME");
+        departmentChoiceBox.getItems().addAll("CSE", "EEE", "Civil", "ME", "Physics", "Math", "Chemistry");
     }
 
     @FXML

@@ -40,6 +40,22 @@ public class AdminDashboardController {
     }
 
     @FXML
+    private void openChangePassword(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/org/example/universitymanagementsystem/change_password.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Change Password");
+            stage.setScene(new Scene(root));
+            stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     private void logout(ActionEvent event) {
         Session.clear();
         try {
@@ -63,7 +79,7 @@ public class AdminDashboardController {
                 Parent view = loader.load();
                 borderPane.setCenter(view);
             } else {
-                // Fallback if not inside a BorderPane
+
                 Scene scene = new Scene(loader.load(), 900, 600);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(scene);

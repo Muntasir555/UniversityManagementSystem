@@ -35,4 +35,7 @@
         </HBox>
     </VBox>
 
+    <javafx.scene.control.Button text="Change Password" onAction="#handleChangePassword" 
+            style="-fx-background-color: #f0ad4e; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+
 </VBox>

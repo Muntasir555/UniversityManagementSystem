@@ -33,4 +33,17 @@ public class AdminDatabase {
         }
         return null;
     }
+
+    public static boolean updatePassword(String username, String newPassword) {
+        String sql = "UPDATE admins SET password = ? WHERE username = ?";
+        try (Connection conn = DBUtil.getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newPassword);
+            pstmt.setString(2, username);
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

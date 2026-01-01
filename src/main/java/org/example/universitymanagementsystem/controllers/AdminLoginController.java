@@ -39,6 +39,7 @@ public class AdminLoginController {
         Admin admin = AdminDatabase.validateLogin(username, password);
 
         if (admin != null) {
+            Session.clear();
             Session.currentAdmin = admin;
             navigateToDashboard(event);
         } else {
