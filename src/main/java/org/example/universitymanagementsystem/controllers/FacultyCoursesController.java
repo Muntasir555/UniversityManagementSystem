@@ -7,12 +7,16 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import org.example.universitymanagementsystem.database.CourseAssignmentDatabase;
 import org.example.universitymanagementsystem.database.SubjectDatabase;
+import org.example.universitymanagementsystem.models.CourseAssignment;
 import org.example.universitymanagementsystem.models.Faculty;
 import org.example.universitymanagementsystem.models.Subject;
 import org.example.universitymanagementsystem.util.Session;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FacultyCoursesController {
 
@@ -44,8 +48,19 @@ public class FacultyCoursesController {
 
     private void loadCourses() {
         Faculty faculty = Session.currentFaculty;
-        List<Subject> subjects = SubjectDatabase.getSubjectsByDepartment(faculty.getDepartment());
-        ObservableList<Subject> data = FXCollections.observableArrayList(subjects);
+        List<CourseAssignment> assignments = CourseAssignmentDatabase.getAssignmentsByFaculty(faculty.getId());
+        ObservableList<Subject> data = FXCollections.observableArrayList();
+        Set<Integer> addedSubjectIds = new HashSet<>();
+
+        for (CourseAssignment ca : assignments) {
+            if (!addedSubjectIds.contains(ca.getSubjectId())) {
+                Subject subject = SubjectDatabase.getSubjectById(ca.getSubjectId());
+                if (subject != null) {
+                    data.add(subject);
+                    addedSubjectIds.add(subject.getId());
+                }
+            }
+        }
         coursesTable.setItems(data);
     }
 }

@@ -16,7 +16,9 @@ import org.example.universitymanagementsystem.util.Session;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FacultyAttendanceController {
 
@@ -73,10 +75,15 @@ public class FacultyAttendanceController {
         List<CourseAssignment> assignments = CourseAssignmentDatabase
                 .getAssignmentsByFaculty(Session.currentFaculty.getId());
         ObservableList<Subject> subjects = FXCollections.observableArrayList();
+        Set<Integer> addedSubjectIds = new HashSet<>();
+
         for (CourseAssignment ca : assignments) {
-            Subject subject = SubjectDatabase.getSubjectById(ca.getSubjectId());
-            if (subject != null) {
-                subjects.add(subject);
+            if (!addedSubjectIds.contains(ca.getSubjectId())) {
+                Subject subject = SubjectDatabase.getSubjectById(ca.getSubjectId());
+                if (subject != null) {
+                    subjects.add(subject);
+                    addedSubjectIds.add(subject.getId());
+                }
             }
         }
         courseComboBox.setItems(subjects);
