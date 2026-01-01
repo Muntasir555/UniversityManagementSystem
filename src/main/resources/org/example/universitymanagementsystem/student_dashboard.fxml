@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.universitymanagementsystem.controllers.StudentDashboardController">
+
+    <!-- ===== Top Header ===== -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" BorderPane.alignment="CENTER">
+            <padding>
+                <Insets top="15" bottom="15" left="20" right="20"/>
+            </padding>
+
+            <Label text="Student Dashboard"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <Label text="University Management System"
+                   style="-fx-text-fill: #666666;"/>
+        </HBox>
+    </top>
+
+    <!-- ===== Left Navigation ===== -->
+    <left>
+        <VBox spacing="15"
+              style="-fx-border-color: #dddddd; -fx-border-width: 0 1 0 0;">
+            <padding>
+                <Insets top="20" left="15" right="15"/>
+            </padding>
+
+            <Button text="Profile"
+                    prefWidth="180"
+                    onAction="#viewProfile"/>
+
+            <Button text="Results"
+                    prefWidth="180"
+                    onAction="#viewResults"/>
+
+            <Button text="Attendance"
+                    prefWidth="180"
+                    onAction="#viewAttendance"/>
+
+            <Button text="Logout"
+                    prefWidth="180"
+                    onAction="#logout"/>
+        </VBox>
+    </left>
+
+    <!-- ===== Center Content ===== -->
+    <center>
+        <VBox alignment="CENTER" spacing="15">
+            <Label text="Welcome, Student"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <Label text="CGPA:"
+                   style="-fx-font-size: 14px;"/>
+
+            <Label fx:id="cgpaLabel"
+                   text="0.00"
+                   style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+            <Label text="Select an option from the left panel to view details."
+                   style="-fx-text-fill: #555555;"/>
+        </VBox>
+    </center>
+
+</BorderPane>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.universitymanagementsystem.controllers.StudentListController"
+      spacing="20" alignment="CENTER">
+
+    <Label text="All Students" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    
+    <javafx.scene.control.ChoiceBox fx:id="departmentFilter" prefWidth="200"/>
+    <javafx.scene.control.ChoiceBox fx:id="batchFilter" prefWidth="200"/>
+    
+    <TableView fx:id="studentsTable" maxWidth="700">
+         <columns>
+             <!-- Columns added in Controller -->
+         </columns>
+    </TableView>
+
+</VBox>
