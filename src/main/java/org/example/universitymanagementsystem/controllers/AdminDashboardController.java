@@ -56,6 +56,11 @@ public class AdminDashboardController {
     }
 
     @FXML
+    private void openNoticeBoard(ActionEvent event) {
+        loadPage(event, "/org/example/universitymanagementsystem/admin_notice_board.fxml");
+    }
+
+    @FXML
     private void logout(ActionEvent event) {
         Session.clear();
         try {

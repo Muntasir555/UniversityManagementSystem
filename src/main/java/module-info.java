@@ -10,10 +10,11 @@ module org.example.universitymanagementsystem {
     requires java.sql;
 
     // 🔴 THIS LINE IS MISSING — ADD IT
-    opens org.example.universitymanagementsystem.controllers to javafx.fxml;
+    opens org.example.universitymanagementsystem.controllers to javafx.fxml, javafx.base;
 
     // This one is fine
     opens org.example.universitymanagementsystem to javafx.fxml;
+    opens org.example.universitymanagementsystem.models to javafx.base;
 
     exports org.example.universitymanagementsystem;
 }

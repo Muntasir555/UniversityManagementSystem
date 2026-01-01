@@ -88,6 +88,14 @@ public class DBUtil {
                     + ");";
             stmt.execute(createCourseAssignmentTable);
 
+            String createNoticeTable = "CREATE TABLE IF NOT EXISTS notices ("
+                    + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + "title TEXT NOT NULL, "
+                    + "content TEXT NOT NULL, "
+                    + "date TEXT NOT NULL"
+                    + ");";
+            stmt.execute(createNoticeTable);
+
             // Schema Upgrade: Add cgpa to students if not exists
             try {
                 stmt.execute("ALTER TABLE students ADD COLUMN cgpa REAL DEFAULT 0.0");

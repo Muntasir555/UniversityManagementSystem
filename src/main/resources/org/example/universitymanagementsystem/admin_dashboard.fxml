@@ -59,6 +59,10 @@
                     prefWidth="180"
                     onAction="#openChangePassword"/>
 
+            <Button text="Notice Board"
+                    prefWidth="180"
+                    onAction="#openNoticeBoard"/>
+
             <Button text="Logout"
                     prefWidth="180"
                     onAction="#logout"/>

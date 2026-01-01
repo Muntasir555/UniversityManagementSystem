@@ -69,6 +69,7 @@ public class StudentDatabase {
                     student.setDepartment(rs.getString("department"));
                     student.setBatch(rs.getString("batch"));
                     student.setPassword(rs.getString("password"));
+                    student.setCgpa(rs.getDouble("cgpa"));
                     return student;
                 }
             }
@@ -95,6 +96,7 @@ public class StudentDatabase {
                     student.setEmail(rs.getString("email"));
                     student.setDepartment(rs.getString("department"));
                     student.setBatch(rs.getString("batch"));
+                    student.setCgpa(rs.getDouble("cgpa"));
                     return student;
                 }
             }
@@ -120,6 +122,7 @@ public class StudentDatabase {
                 student.setEmail(rs.getString("email"));
                 student.setDepartment(rs.getString("department"));
                 student.setBatch(rs.getString("batch"));
+                student.setCgpa(rs.getDouble("cgpa"));
                 // Not exposing password
                 students.add(student);
             }
@@ -147,6 +150,7 @@ public class StudentDatabase {
                     student.setEmail(rs.getString("email"));
                     student.setDepartment(rs.getString("department"));
                     student.setBatch(rs.getString("batch"));
+                    student.setCgpa(rs.getDouble("cgpa"));
                     // Not exposing password
                     students.add(student);
                 }
@@ -175,6 +179,7 @@ public class StudentDatabase {
                     student.setEmail(rs.getString("email"));
                     student.setDepartment(rs.getString("department"));
                     student.setBatch(rs.getString("batch"));
+                    student.setCgpa(rs.getDouble("cgpa"));
                     students.add(student);
                 }
             }
@@ -203,6 +208,7 @@ public class StudentDatabase {
                     student.setEmail(rs.getString("email"));
                     student.setDepartment(rs.getString("department"));
                     student.setBatch(rs.getString("batch"));
+                    student.setCgpa(rs.getDouble("cgpa"));
                     students.add(student);
                 }
             }
