@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.universitymanagementsystem.controllers.AdminNoticeBoardController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="20" bottom="20" left="20" right="20"/>
+            </padding>
+            <Button text="Back to Dashboard" onAction="#handleBack"/>
+            <Label text="Manage Notices" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="20">
+            <padding>
+                <Insets top="10" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- Input Section -->
+            <VBox spacing="10" style="-fx-background-color: #f4f4f4; -fx-padding: 15; -fx-background-radius: 5;">
+                <Label text="Add New Notice" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="titleField" promptText="Notice Title"/>
+                <TextArea fx:id="contentArea" promptText="Notice Content" prefRowCount="3"/>
+                <DatePicker fx:id="datePicker" promptText="Select Date"/>
+                <Button text="Post Notice" onAction="#handleAddNotice" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+            </VBox>
+
+            <!-- List Section -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+                <Label text="Existing Notices" style="-fx-font-weight: bold;"/>
+                <TableView fx:id="noticeTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+                        <TableColumn fx:id="dateColumn" text="Date" prefWidth="100"/>
+                        <TableColumn fx:id="titleColumn" text="Title" prefWidth="200"/>
+                        <TableColumn fx:id="contentColumn" text="Content" prefWidth="400"/>
+                    </columns>
+                </TableView>
+                <Button text="Delete Selected Notice" onAction="#handleDeleteNotice" style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+            </VBox>
+        </VBox>
+    </center>
+
+</BorderPane>

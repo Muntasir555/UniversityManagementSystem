@@ -11,58 +11,68 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.universitymanagementsystem.controllers.FacultyDashboardController">
+            fx:controller="org.example.universitymanagementsystem.controllers.FacultyDashboardController"
+            style="-fx-background-color: #fff3e0;">
 
     <!-- ===== Top Header ===== -->
     <top>
-        <HBox alignment="CENTER_LEFT" spacing="20">
+        <HBox alignment="CENTER_LEFT" spacing="20"
+              style="-fx-background-color: linear-gradient(to right, #e65100, #ef6c00); -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);">
             <padding>
-                <Insets top="15" bottom="15" left="20" right="20"/>
+                <Insets top="20" bottom="20" left="25" right="25"/>
             </padding>
 
             <Label text="Faculty Dashboard"
-                   style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white;"/>
 
             <Label text="University Management System"
-                   style="-fx-text-fill: #666666;"/>
+                   style="-fx-text-fill: #ffe0b2; -fx-font-size: 14px;"/>
         </HBox>
     </top>
 
     <!-- ===== Left Navigation Panel ===== -->
     <left>
-        <VBox spacing="15"
-              style="-fx-border-color: #dddddd; -fx-border-width: 0 1 0 0;">
+        <VBox spacing="12"
+              style="-fx-background-color: white; -fx-border-color: #ffe0b2; -fx-border-width: 0 1 0 0; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 2, 0);">
             <padding>
-                <Insets top="20" left="15" right="15"/>
+                <Insets top="25" left="15" right="15" bottom="25"/>
             </padding>
 
             <Button text="Profile"
-                    prefWidth="180"
-                    onAction="#viewProfile"/>
+                    prefWidth="200"
+                    onAction="#viewProfile"
+                    style="-fx-background-color: white; -fx-text-fill: #e65100; -fx-border-color: #ffe0b2; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand; -fx-alignment: CENTER_LEFT; -fx-padding: 10; -fx-font-size: 14px;"/>
 
             <Button text="Courses"
-                    prefWidth="180"
-                    onAction="#viewCourses"/>
+                    prefWidth="200"
+                    onAction="#viewCourses"
+                    style="-fx-background-color: white; -fx-text-fill: #e65100; -fx-border-color: #ffe0b2; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand; -fx-alignment: CENTER_LEFT; -fx-padding: 10; -fx-font-size: 14px;"/>
 
             <Button text="Attendance"
-                    prefWidth="180"
-                    onAction="#markAttendance"/>
+                    prefWidth="200"
+                    onAction="#markAttendance"
+                    style="-fx-background-color: white; -fx-text-fill: #e65100; -fx-border-color: #ffe0b2; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand; -fx-alignment: CENTER_LEFT; -fx-padding: 10; -fx-font-size: 14px;"/>
 
             <Button text="Results"
-                    prefWidth="180"
-                    onAction="#addResult"/>
+                    prefWidth="200"
+                    onAction="#addResult"
+                    style="-fx-background-color: white; -fx-text-fill: #e65100; -fx-border-color: #ffe0b2; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand; -fx-alignment: CENTER_LEFT; -fx-padding: 10; -fx-font-size: 14px;"/>
+
+            <VBox VBox.vgrow="ALWAYS"/>
 
             <Button text="Logout"
-                    prefWidth="180"
-                    onAction="#logout"/>
+                    prefWidth="200"
+                    onAction="#logout"
+                    style="-fx-background-color: #ffebee; -fx-text-fill: #c62828; -fx-border-color: #ef9a9a; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand; -fx-font-weight: bold;"/>
         </VBox>
     </left>
 
+
     <!-- ===== Dynamic Content Area ===== -->
     <center>
-        <StackPane fx:id="contentPane">
+        <StackPane fx:id="contentPane" style="-fx-padding: 20;">
             <Label text="Select an option from the left menu"
-                   style="-fx-text-fill: #555555; -fx-font-size: 14px;"/>
+                   style="-fx-text-fill: #757575; -fx-font-size: 16px;"/>
         </StackPane>
     </center>
 

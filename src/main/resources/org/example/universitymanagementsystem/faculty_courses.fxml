@@ -13,7 +13,7 @@
     
     <TableView fx:id="coursesTable" maxWidth="600">
          <columns>
-             <!-- Columns added in Controller -->
+             
          </columns>
     </TableView>
 
